@@ -1,0 +1,7 @@
+services:
+  web:
+    container_name: looser
+    build:
+      context: ../..
+      dockerfile: ./build/web/Dockerfile
+    env_file: ../../.dev.env
