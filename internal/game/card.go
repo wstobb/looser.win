@@ -28,7 +28,7 @@ type Card struct {
 	Rank int
 }
 
-func NewCard(suit, rank int) *Card {
+func newCard(suit, rank int) *Card {
 	return &Card{
 		Suit: suit,
 		Rank: rank,
