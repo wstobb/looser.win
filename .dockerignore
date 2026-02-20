@@ -3,5 +3,5 @@ build
 deploy
 *.env
 .dockerignore
-static
+cmd/web/static
 bin

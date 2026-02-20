@@ -1,29 +1,28 @@
 package app
 
 import (
-	"net/http"
+	"io/fs"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/rs/zerolog"
 	"github.com/wstobb/looser.win/internal/logging"
+	"github.com/wstobb/looser.win/internal/server"
 )
 
 type App struct {
-	mux    *chi.Mux
 	logger *zerolog.Logger
+	server *server.Server
 }
 
-func New() *App {
+func New(static, templates fs.FS) *App {
 	logger := logging.New(zerolog.DebugLevel)
 	return &App{
-		mux:    chi.NewMux(),
+		server: server.New(static, templates),
 		logger: logger,
 	}
 }
 
 func (a *App) Start() error {
-	a.logger.Info().Msg("starting http server")
-	if err := http.ListenAndServe(":80", a.mux); err != nil {
+	if err := a.server.Start(a.logger); err != nil {
 		return err
 	}
 	return nil

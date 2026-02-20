@@ -5,3 +5,5 @@ services:
       context: ../..
       dockerfile: ./build/web/Dockerfile
     env_file: ../../.dev.env
+    ports:
+      - 5050:5050
