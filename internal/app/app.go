@@ -16,7 +16,7 @@ type App struct {
 func New(static, templates fs.FS) *App {
 	logger := logging.New(zerolog.DebugLevel)
 	return &App{
-		server: server.New(static, templates),
+		server: server.New(static, templates, logger),
 		logger: logger,
 	}
 }

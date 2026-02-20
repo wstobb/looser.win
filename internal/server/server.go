@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/rs/zerolog"
 	"github.com/wstobb/looser.win/internal/config"
+	"github.com/wstobb/looser.win/internal/logging"
 )
 
 type Server struct {
@@ -16,9 +17,11 @@ type Server struct {
 	templates fs.FS
 }
 
-func New(static, templates fs.FS) *Server {
+func New(static, templates fs.FS, logger *zerolog.Logger) *Server {
+	mux := chi.NewMux()
+	mux.Use(logging.LoggerMiddleware(logger))
 	return &Server{
-		mux:       chi.NewMux(),
+		mux:       mux,
 		static:    static,
 		templates: templates,
 	}
