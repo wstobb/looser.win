@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"github.com/wstobb/looser.win/internal/app"
+)
 
 func main() {
-	fmt.Println("hello!")
+	if err := app.New().Start(); err != nil {
+		panic(err)
+	}
 }
