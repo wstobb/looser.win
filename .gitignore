@@ -1,4 +1,5 @@
 .dev.env
 node_modules
 cmd/web/static
+cmd/web/templates
 bin
