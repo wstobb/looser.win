@@ -1,0 +1,11 @@
+{
+  "name": "looser.win",
+  "module": "script/index.js",
+  "type": "module",
+  "private": true,
+  "devDependencies": {},
+  "peerDependencies": {},
+  "dependencies": {
+    "htmx.org": "^2.0.8"
+  }
+}
