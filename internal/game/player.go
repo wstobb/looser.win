@@ -9,12 +9,14 @@ type Player interface {
 	IsActive() bool
 }
 
-type NPC struct {
-	*Inventory
-}
+func NewPlayers() []Player {
+	players := make([]Player, 0, 4)
 
-func NewNPC() *NPC {
-	return &NPC{
-		Inventory: NewInventory(),
+	players = append(players, NewUser())
+
+	for range 3 {
+		players = append(players, NewNPC())
 	}
+
+	return players
 }

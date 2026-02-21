@@ -7,16 +7,16 @@ import (
 )
 
 type Game struct {
-	Rounds int
-	Deck   *Deck
-	Hands  []*Hand
+	Rounds  int
+	Deck    *Deck
+	Players []Player
 }
 
 func newGame() *Game {
 	return &Game{
-		Rounds: 0,
-		Deck:   NewDeck(),
-		Hands:  tools.MakeSlice(4, NewHand),
+		Rounds:  0,
+		Deck:    NewDeck(),
+		Players: NewPlayers(),
 	}
 }
 
@@ -24,19 +24,19 @@ func (g *Game) Start() {
 	g.Deck.Shuffle()
 	g.Deal()
 
-	for i, hand := range g.Hands {
-		for j, card := range hand.Cards {
-			fmt.Printf("hand %d | card %d: %d, %d\n", i, j, card.Suit, card.Rank)
+	for i, player := range g.Players {
+		for j, card := range player.Get().Hand {
+			fmt.Printf("player %d | card %d: %d, %d\n", i, j, card.Suit, card.Rank)
 		}
 	}
 }
 
 func (g *Game) Deal() {
 	for range 5 {
-		for i := range len(g.Hands) {
+		for i := range len(g.Players) {
 			var card *Card
 			card, g.Deck.Cards = tools.Pop(g.Deck.Cards)
-			g.Hands[i].Cards = append(g.Hands[i].Cards, card)
+			g.Players[i].Get().Hand = append(g.Players[i].Get().Hand, card)
 		}
 	}
 }
