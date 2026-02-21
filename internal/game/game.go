@@ -15,14 +15,14 @@ type Game struct {
 func newGame() *Game {
 	return &Game{
 		Rounds: 0,
-		Deck:   newDeck(),
-		Hands:  tools.MakeSlice(4, newHand),
+		Deck:   NewDeck(),
+		Hands:  tools.MakeSlice(4, NewHand),
 	}
 }
 
-func (g *Game) start() {
-	g.Deck.shuffle()
-	g.deal()
+func (g *Game) Start() {
+	g.Deck.Shuffle()
+	g.Deal()
 
 	for i, hand := range g.Hands {
 		for j, card := range hand.Cards {
@@ -31,9 +31,9 @@ func (g *Game) start() {
 	}
 }
 
-func (g *Game) deal() {
-	for i := range 4 {
-		for range 5 {
+func (g *Game) Deal() {
+	for range 5 {
+		for i := range len(g.Hands) {
 			var card *Card
 			card, g.Deck.Cards = tools.Pop(g.Deck.Cards)
 			g.Hands[i].Cards = append(g.Hands[i].Cards, card)

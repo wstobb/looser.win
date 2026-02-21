@@ -1,6 +1,8 @@
 package game
 
 import (
+	"fmt"
+
 	"github.com/google/uuid"
 )
 
@@ -16,6 +18,11 @@ func NewSession() *Session {
 	}
 }
 
+func (s *Session) Reset() {
+	s.Game = newGame()
+}
+
 func (s *Session) Start() {
-	s.Game.start()
+	fmt.Printf("session: %s\n", s.UUID.String())
+	s.Game.Start()
 }
