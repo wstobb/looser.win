@@ -9,12 +9,12 @@ type Player interface {
 	IsActive() bool
 }
 
-func NewPlayers() []Player {
+func newPlayers() []Player {
 	players := make([]Player, 0, 4)
-	players = append(players, NewUser())
-	players = append(players, NewSquirrelJak())
-	players = append(players, NewCobson())
-	players = append(players, NewChud())
+	players = append(players, newUser())
+	players = append(players, newSquirrelJak())
+	players = append(players, newCobson())
+	players = append(players, newChud())
 
 	return players
 }
@@ -26,7 +26,7 @@ type Seat struct {
 	Folded   bool
 }
 
-func NewSeat() *Seat {
+func newSeat() *Seat {
 	return &Seat{
 		Hand:     make([]*Card, 0, 5),
 		Chips:    1000,
@@ -45,9 +45,9 @@ type User struct {
 	Number int
 }
 
-func NewUser() *User {
+func newUser() *User {
 	return &User{
-		Seat:   NewSeat(),
+		Seat:   newSeat(),
 		Number: 0,
 	}
 }
@@ -75,9 +75,9 @@ type SquirrelJak struct {
 	Number int
 }
 
-func NewSquirrelJak() *SquirrelJak {
+func newSquirrelJak() *SquirrelJak {
 	return &SquirrelJak{
-		Seat:   NewSeat(),
+		Seat:   newSeat(),
 		Number: 1,
 	}
 }
@@ -107,9 +107,9 @@ type Cobson struct {
 	Number int
 }
 
-func NewCobson() *Cobson {
+func newCobson() *Cobson {
 	return &Cobson{
-		Seat:   NewSeat(),
+		Seat:   newSeat(),
 		Number: 2,
 	}
 }
@@ -139,9 +139,9 @@ type Chud struct {
 	Number int
 }
 
-func NewChud() *Chud {
+func newChud() *Chud {
 	return &Chud{
-		Seat:   NewSeat(),
+		Seat:   newSeat(),
 		Number: 3,
 	}
 }

@@ -2,8 +2,6 @@ package game
 
 import (
 	"fmt"
-
-	"github.com/wstobb/looser.win/internal/tools"
 )
 
 type Game struct {
@@ -15,8 +13,8 @@ type Game struct {
 func newGame() *Game {
 	return &Game{
 		Rounds:  0,
-		Deck:    NewDeck(),
-		Players: NewPlayers(),
+		Deck:    newDeck(),
+		Players: newPlayers(),
 	}
 }
 
@@ -34,8 +32,7 @@ func (g *Game) Start() {
 func (g *Game) Deal() {
 	for range 5 {
 		for i := range len(g.Players) {
-			var card *Card
-			card, g.Deck.Cards = tools.Pop(g.Deck.Cards)
+			card := g.Deck.Draw()
 			g.Players[i].GetSeat().Hand = append(g.Players[i].GetSeat().Hand, card)
 		}
 	}

@@ -2,8 +2,6 @@ package game
 
 import (
 	"math/rand"
-
-	"github.com/wstobb/looser.win/internal/tools"
 )
 
 type Deck struct {
@@ -11,14 +9,14 @@ type Deck struct {
 	Used  []*Card
 }
 
-func NewDeck() *Deck {
+func newDeck() *Deck {
 	deck := Deck{
 		Cards: make([]*Card, 0, 52),
 		Used:  make([]*Card, 0),
 	}
 	for i := range 4 {
 		for j := range 13 {
-			deck.Cards = append(deck.Cards, NewCard(i+1, j+1))
+			deck.Cards = append(deck.Cards, newCard(i+1, j+1))
 		}
 	}
 	return &deck
@@ -31,8 +29,12 @@ func (d *Deck) Shuffle() {
 }
 
 func (d *Deck) Draw() *Card {
-	var card *Card
-	card, d.Cards = tools.Pop(d.Cards)
+	if len(d.Cards) == 0 {
+		return nil
+	}
+
+	card := d.Cards[0]
+	d.Cards = d.Cards[1:]
 	return card
 }
 
