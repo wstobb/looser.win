@@ -17,5 +17,5 @@ func NewSession() *Session {
 }
 
 func (s *Session) Start() {
-	s.Game.Deck.shuffle()
+	s.Game.start()
 }

@@ -4,6 +4,7 @@ import (
 	"io/fs"
 
 	"github.com/rs/zerolog"
+	"github.com/wstobb/looser.win/internal/game"
 	"github.com/wstobb/looser.win/internal/logging"
 	"github.com/wstobb/looser.win/internal/server"
 )
@@ -22,6 +23,8 @@ func New(static, templates fs.FS) *App {
 }
 
 func (a *App) Start() error {
+	session := game.NewSession()
+	session.Start()
 	if err := a.server.Start(a.logger); err != nil {
 		return err
 	}

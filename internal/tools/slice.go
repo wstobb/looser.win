@@ -7,3 +7,7 @@ func MakeSlice[T any](n int, fn func() T) []T {
 	}
 	return s
 }
+
+func Pop[T any](s []T) (T, []T) {
+	return s[len(s)-1], s[:len(s)-1]
+}
