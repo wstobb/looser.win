@@ -25,7 +25,7 @@ func (g *Game) Start() {
 	g.Deal()
 
 	for i, player := range g.Players {
-		for j, card := range player.Get().Hand {
+		for j, card := range player.GetSeat().Hand {
 			fmt.Printf("player %d | card %d: %d, %d\n", i, j, card.Suit, card.Rank)
 		}
 	}
@@ -36,7 +36,7 @@ func (g *Game) Deal() {
 		for i := range len(g.Players) {
 			var card *Card
 			card, g.Deck.Cards = tools.Pop(g.Deck.Cards)
-			g.Players[i].Get().Hand = append(g.Players[i].Get().Hand, card)
+			g.Players[i].GetSeat().Hand = append(g.Players[i].GetSeat().Hand, card)
 		}
 	}
 }
