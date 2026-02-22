@@ -10,7 +10,7 @@ type Game struct {
 	Players []Player
 }
 
-func newGame() *Game {
+func NewGame() *Game {
 	return &Game{
 		Rounds:  0,
 		Deck:    newDeck(),

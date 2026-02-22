@@ -11,13 +11,15 @@ import (
 type Session struct {
 	UUID    uuid.UUID
 	Game    *Game
+	Active  bool
 	Expires time.Time
 }
 
 func NewSession(w http.ResponseWriter, logger *zerolog.Logger) *Session {
 	session := &Session{
 		UUID:    uuid.New(),
-		Game:    newGame(),
+		Game:    NewGame(),
+		Active:  false,
 		Expires: time.Now().Add(time.Hour * 6),
 	}
 
@@ -29,12 +31,13 @@ func NewSession(w http.ResponseWriter, logger *zerolog.Logger) *Session {
 }
 
 func (s *Session) Reset(w http.ResponseWriter) {
-	s.Game = newGame()
+	s.Game = NewGame()
 	s.Expires = time.Now().Add(time.Hour * 6)
 	s.SetCookie(w)
 }
 
 func (s *Session) Start() {
+	s.Active = true
 	s.Game.Start()
 }
 

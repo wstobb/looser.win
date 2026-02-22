@@ -18,14 +18,14 @@ func (a *App) pageCreator(w http.ResponseWriter, name string) {
 func (a *App) ensureSession(w http.ResponseWriter, r *http.Request) *game.Session {
 	sessionCookie, err := r.Cookie("session_token")
 	if err != nil {
-		session := game.NewSession(w, a.logger)
-		return session
+		return game.NewSession(w, a.logger)
 	}
 
-	if a.sessions[sessionCookie.Value] == nil {
-		session := game.NewSession(w, a.logger)
-		return session
+	session := a.sessions[sessionCookie.Value]
+
+	if session == nil {
+		return game.NewSession(w, a.logger)
 	}
 
-	return a.sessions[sessionCookie.Value]
+	return session
 }
