@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"path/filepath"
 	"text/template"
+
+	"github.com/wstobb/looser.win/internal/game"
 )
 
 func (a *App) pageCreator(w http.ResponseWriter, name string) {
@@ -11,4 +13,19 @@ func (a *App) pageCreator(w http.ResponseWriter, name string) {
 	if err := page.Execute(w, nil); err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
+}
+
+func (a *App) ensureSession(w http.ResponseWriter, r *http.Request) *game.Session {
+	sessionCookie, err := r.Cookie("session_token")
+	if err != nil {
+		session := game.NewSession(w, a.logger)
+		return session
+	}
+
+	if a.sessions[sessionCookie.Value] == nil {
+		session := game.NewSession(w, a.logger)
+		return session
+	}
+
+	return a.sessions[sessionCookie.Value]
 }

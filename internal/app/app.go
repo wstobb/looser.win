@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/google/uuid"
 	"github.com/rs/zerolog"
 	"github.com/wstobb/looser.win/internal/config"
 	"github.com/wstobb/looser.win/internal/game"
@@ -18,7 +17,7 @@ type App struct {
 	mux       *chi.Mux
 	static    fs.FS
 	templates fs.FS
-	sessions  map[uuid.UUID]*game.Session
+	sessions  map[string]*game.Session
 }
 
 func New(static, templates fs.FS) *App {
@@ -28,7 +27,7 @@ func New(static, templates fs.FS) *App {
 		mux:       chi.NewMux(),
 		static:    static,
 		templates: templates,
-		sessions:  make(map[uuid.UUID]*game.Session),
+		sessions:  make(map[string]*game.Session),
 	}
 }
 
