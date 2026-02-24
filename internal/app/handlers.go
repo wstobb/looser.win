@@ -12,7 +12,7 @@ func (a *App) indexHander(w http.ResponseWriter, r *http.Request) {
 		session.Start()
 	}
 
-	a.sessions[session.UUID.String()] = session
-	a.logger.Debug().Msg(fmt.Sprintf("session %s loaded", session.UUID.String()))
+	a.sessions[session.ID] = session
+	a.logger.Debug().Msg(fmt.Sprintf("session %s loaded", session.ID))
 	a.pageCreator(w, "index.html")
 }

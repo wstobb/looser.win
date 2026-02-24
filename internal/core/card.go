@@ -1,4 +1,4 @@
-package game
+package core
 
 const (
 	Hearts = iota + 1
@@ -26,11 +26,4 @@ const (
 type Card struct {
 	Suit int
 	Rank int
-}
-
-func newCard(suit, rank int) *Card {
-	return &Card{
-		Suit: suit,
-		Rank: rank,
-	}
 }
