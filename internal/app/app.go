@@ -32,8 +32,13 @@ func New(static, templates fs.FS) *App {
 }
 
 func (a *App) Start() error {
+	// Routes
 	a.fileServers()
 	a.routes()
+
+	// Services
+	killPruneSessions := a.PruneSessionsService()
+	defer killPruneSessions()
 
 	port := config.GetPort()
 

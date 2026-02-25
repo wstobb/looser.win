@@ -21,6 +21,7 @@ const (
 	Jack
 	Queen
 	King
+	Joker
 )
 
 type Card struct {

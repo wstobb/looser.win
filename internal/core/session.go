@@ -35,5 +35,4 @@ func NewSession(w http.ResponseWriter) *Session {
 
 func (s *Session) Start() {
 	s.Active = true
-	s.Game.Start()
 }

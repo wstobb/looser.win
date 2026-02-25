@@ -1,5 +1,5 @@
 package core
 
 type Inventory interface {
-	Get() Inventory
+	Get()
 }
